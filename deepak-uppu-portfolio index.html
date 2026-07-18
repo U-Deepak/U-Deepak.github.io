@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deepak Uppu | Senior AWS DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --panel:#111820;
+    --panel-2:#0E141B;
+    --line:#1E2A35;
+    --text:#E7EEF3;
+    --muted:#7C8D9C;
+    --amber:#F2A65A;
+    --cyan:#4FD1C5;
+    --ok:#6CD48A;
+    --radius:3px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(79,209,197,0.07), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(242,166,90,0.06), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:rgba(79,209,197,0.25); color:#fff; }
+  a{ color:inherit; }
+
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  .display{ font-family:'Space Grotesk', sans-serif; }
+
+  .wrap{ max-width:980px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- Top nav / status bar ---------- */
+  .statusbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,15,20,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .statusbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:52px; max-width:980px;
+  }
+  .statusbar .id{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--muted);
+    display:flex; align-items:center; gap:8px;
+  }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 8px var(--ok); animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  .statusbar nav{ display:flex; gap:22px; font-family:'JetBrains Mono', monospace; font-size:12.5px; }
+  .statusbar nav a{ color:var(--muted); text-decoration:none; transition:color .15s; }
+  .statusbar nav a:hover{ color:var(--cyan); }
+
+  @media (max-width:640px){
+    .statusbar nav{ gap:14px; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:96px 0 64px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
+  .hero .kicker{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--cyan);
+    letter-spacing:.06em; margin-bottom:22px; display:flex; align-items:center; gap:10px;
+  }
+  .hero .kicker::before{ content:'$'; color:var(--muted); }
+  .hero h1{
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:clamp(40px, 6vw, 66px); line-height:1.03; letter-spacing:-0.02em;
+    max-width:780px;
+  }
+  .hero h1 .accent{ color:var(--amber); }
+  .hero .role{
+    margin-top:20px; font-size:19px; color:var(--muted); max-width:560px;
+  }
+  .hero .role strong{ color:var(--text); font-weight:600; }
+
+  .cursor{
+    display:inline-block; width:9px; height:1.05em; background:var(--amber);
+    vertical-align:text-bottom; margin-left:4px; animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .cert-badge{
+    margin-top:22px; display:inline-flex; align-items:center; gap:9px;
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--amber);
+    border:1px solid rgba(242,166,90,0.35); background:rgba(242,166,90,0.06);
+    border-radius:20px; padding:7px 14px 7px 10px;
+  }
+  .cert-badge .cert-icon{
+    width:16px; height:16px; border-radius:50%; background:var(--amber); color:#221305;
+    display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+  }
+
+  .hero-meta{
+    margin-top:44px; display:flex; gap:0; border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; max-width:720px;
+  }
+  .hero-meta div{
+    flex:1; padding:16px 18px; border-right:1px solid var(--line);
+  }
+  .hero-meta div:last-child{ border-right:none; }
+  .hero-meta .num{ font-family:'Space Grotesk', sans-serif; font-size:26px; font-weight:600; color:var(--text); }
+  .hero-meta .lbl{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--muted); margin-top:4px; letter-spacing:.03em; }
+
+  .hero-contact{
+    margin-top:36px; display:flex; flex-wrap:wrap; gap:18px;
+    font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--muted);
+  }
+  .hero-contact a{ text-decoration:none; color:var(--muted); border-bottom:1px dashed transparent; transition:.15s; }
+  .hero-contact a:hover{ color:var(--cyan); border-bottom-color:var(--cyan); }
+
+  /* ---------- Section label ---------- */
+  .section{ padding:64px 0; border-bottom:1px solid var(--line); }
+  .section-label{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.12em; margin-bottom:8px;
+  }
+  .section-title{
+    font-family:'Space Grotesk', sans-serif; font-size:28px; font-weight:600; margin-bottom:36px;
+  }
+
+  /* ---------- Skills : stack panel ---------- */
+  .stack-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
+  @media (max-width:700px){ .stack-grid{ grid-template-columns:1fr; } }
+  .stack-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px;
+  }
+  .stack-card h3{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--amber);
+    text-transform:uppercase; letter-spacing:.08em; margin-bottom:12px;
+  }
+  .pills{ display:flex; flex-wrap:wrap; gap:7px; }
+  .pill{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text);
+    background:var(--panel-2); border:1px solid var(--line); border-radius:20px; padding:4px 11px;
+  }
+
+  /* ---------- Pipeline / experience ---------- */
+  .pipeline{ position:relative; padding-left:34px; }
+  .pipeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:linear-gradient(var(--cyan), var(--line) 90%);
+  }
+  .stage{ position:relative; padding-bottom:48px; }
+  .stage:last-child{ padding-bottom:0; }
+  .stage::before{
+    content:''; position:absolute; left:-34px; top:4px; width:11px; height:11px;
+    background:var(--bg); border:2px solid var(--cyan); border-radius:50%;
+  }
+  .stage-head{
+    display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 20px;
+    margin-bottom:6px;
+  }
+  .stage-head h3{ font-family:'Space Grotesk', sans-serif; font-size:20px; font-weight:600; }
+  .stage-head .when{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); white-space:nowrap; }
+  .stage-role{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--amber); margin-bottom:14px; }
+  .stage ul{ list-style:none; }
+  .stage li{
+    position:relative; padding-left:18px; margin-bottom:9px; color:#C6D2DB; font-size:14.5px;
+  }
+  .stage li::before{ content:'›'; position:absolute; left:0; color:var(--cyan); font-family:'JetBrains Mono', monospace; }
+  .stage.collapsed ul{ display:none; }
+  .toggle{
+    margin-top:12px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted);
+    background:none; border:1px solid var(--line); border-radius:20px; padding:5px 13px; cursor:pointer;
+    transition:.15s;
+  }
+  .toggle:hover{ color:var(--cyan); border-color:var(--cyan); }
+
+  /* ---------- Education ---------- */
+  .edu-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; }
+  @media (max-width:700px){ .edu-grid{ grid-template-columns:1fr; } }
+  .edu-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px;
+  }
+  .edu-card .deg{ font-family:'Space Grotesk', sans-serif; font-size:17px; font-weight:600; margin-bottom:6px; }
+  .edu-card .school{ font-size:14px; color:#C6D2DB; }
+  .edu-card .meta{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); margin-top:10px; }
+
+  /* ---------- Footer / contact ---------- */
+  footer{ padding:64px 0 80px; }
+  footer .section-title{ margin-bottom:16px; }
+  footer p{ color:var(--muted); max-width:480px; margin-bottom:28px; }
+  .contact-row{ display:flex; flex-wrap:wrap; gap:14px; }
+  .btn{
+    font-family:'JetBrains Mono', monospace; font-size:13px; text-decoration:none;
+    padding:12px 20px; border-radius:var(--radius); border:1px solid var(--line);
+    color:var(--text); transition:.15s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn.primary{ background:var(--cyan); color:#06201C; border-color:var(--cyan); font-weight:600; }
+  .btn.primary:hover{ background:#6be0d4; }
+  .btn:not(.primary):hover{ border-color:var(--muted); }
+  .foot-note{ margin-top:56px; font-family:'JetBrains Mono', monospace; font-size:11.5px; color:#4A5865; }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor, .dot{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="wrap">
+    <div class="id"><span class="dot"></span> uppu-deepak :: status=available</div>
+    <nav>
+      <a href="#stack">stack</a>
+      <a href="#experience">experience</a>
+      <a href="#education">education</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">whoami</div>
+    <h1>Deepak Uppu<br><span class="accent">Senior AWS DevOps</span> Engineer<span class="cursor"></span></h1>
+    <p class="role">AWS-certified engineer with a Master's in Computer Science, building <strong>Terraform-driven infrastructure</strong>, <strong>Jenkins CI/CD pipelines</strong>, and <strong>Kubernetes platforms</strong> across AWS, GCP, and Azure, and migrating on-prem estates into them without the downtime.</p>
+
+    <div class="cert-badge">
+      <span class="cert-icon">✓</span>
+      <span>AWS Certified Solutions Architect - Associate</span>
+    </div>
+
+    <div class="hero-meta">
+      <div>
+        <div class="num">5+ yrs</div>
+        <div class="lbl">DEVOPS &amp; SRE</div>
+      </div>
+      <div>
+        <div class="num">3</div>
+        <div class="lbl">CLOUDS: AWS / GCP / AZURE</div>
+      </div>
+      <div>
+        <div class="num">40%</div>
+        <div class="lbl">QUERY LATENCY CUT, LAST ROLE</div>
+      </div>
+      <div>
+        <div class="num">4</div>
+        <div class="lbl">ENTERPRISE ENGAGEMENTS</div>
+      </div>
+    </div>
+
+    <div class="hero-contact">
+      <span>United States</span>
+      <a href="tel:6304460007">630-446-0007</a>
+      <a href="mailto:uppudeepak1@gmail.com">uppudeepak1@gmail.com</a>
+      <a href="https://www.linkedin.com/in/deepak-uppu-b81158179/" target="_blank" rel="noopener">linkedin.com/in/deepak-uppu</a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="stack">
+  <div class="wrap">
+    <div class="section-label">// tech stack</div>
+    <div class="section-title">What runs in production</div>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <h3>Cloud &amp; IaC</h3>
+        <div class="pills">
+          <span class="pill">AWS (EC2, S3, RDS, VPC, Lambda, EKS, ELB)</span>
+          <span class="pill">GCP (GKE, BigQuery, Cloud SQL)</span>
+          <span class="pill">Azure</span>
+          <span class="pill">Terraform</span>
+          <span class="pill">CloudFormation</span>
+          <span class="pill">Ansible</span>
+          <span class="pill">Puppet / Chef</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>CI/CD &amp; Containers</h3>
+        <div class="pills">
+          <span class="pill">Jenkins</span>
+          <span class="pill">GitHub Actions</span>
+          <span class="pill">GitLab CI</span>
+          <span class="pill">Harness</span>
+          <span class="pill">Docker</span>
+          <span class="pill">Kubernetes</span>
+          <span class="pill">Mesos / Marathon</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>Observability &amp; SRE</h3>
+        <div class="pills">
+          <span class="pill">Prometheus</span>
+          <span class="pill">Grafana</span>
+          <span class="pill">Datadog</span>
+          <span class="pill">ELK Stack</span>
+          <span class="pill">CloudWatch</span>
+          <span class="pill">SLI / SLO / SLA</span>
+          <span class="pill">AIOps</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>Languages &amp; Data</h3>
+        <div class="pills">
+          <span class="pill">Python</span>
+          <span class="pill">Bash / Shell</span>
+          <span class="pill">Groovy</span>
+          <span class="pill">Ruby</span>
+          <span class="pill">MySQL / PostgreSQL</span>
+          <span class="pill">MongoDB</span>
+          <span class="pill">Cassandra</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-label">// deploy log</div>
+    <div class="section-title">Experience</div>
+
+    <div class="pipeline">
+
+      <div class="stage">
+        <div class="stage-head">
+          <h3>Southwest Airlines</h3>
+          <span class="when mono">Mar 2025 - Present</span>
+        </div>
+        <div class="stage-role">Senior AWS DevOps Engineer · Dallas, TX</div>
+        <ul>
+          <li>Automated infrastructure provisioning with reusable Terraform modules (VPCs, Security Groups, EKS, ECR, EC2) for consistent, version-controlled deployments across multiple AWS subscriptions.</li>
+          <li>Built end-to-end Jenkins CI/CD pipelines, migrating legacy jobs to a new pipeline model and integrating Harness, GitHub, Maven, Nexus, Ansible, and Docker for multi-tier deployments.</li>
+          <li>Optimized T-SQL/Azure SQL performance through indexing, Query Store, and partitioning, improving query performance 40% and cutting I/O latency.</li>
+          <li>Defined SRE practices (SLIs/SLOs/SLAs) and built observability with Prometheus, Grafana, and ELK for anomaly detection; introduced AIOps for automated remediation.</li>
+          <li>Operationalized Kubernetes with logging, monitoring, security, and service mesh, and shipped GitOps-powered continuous delivery pipelines.</li>
+          <li>Authored reusable Terraform modules for mission-critical Tier-0 applications, reducing manual provisioning errors.</li>
+        </ul>
+      </div>
+
+      <div class="stage">
+        <div class="stage-head">
+          <h3>Citi Bank</h3>
+          <span class="when mono">Feb 2024 - Feb 2025</span>
+        </div>
+        <div class="stage-role">Senior Azure DevOps Engineer · New York, NY</div>
+        <ul>
+          <li>Architected Azure SQL Database (PaaS) and SQL Server on Azure VMs, configuring elastic pools, geo-replication, and Key Vault-integrated backups; led on-prem to Azure SQL MI migrations via DMS with minimal downtime.</li>
+          <li>Managed multi-cloud infrastructure across AWS and GCP, automating deployments with Ansible + Jenkins and Lambda-based data processing for a 40% efficiency gain.</li>
+          <li>Deployed .NET applications via Azure DevOps and GitHub Actions; automated Java app deployment with Python, Chef, and Puppet across Linux/Red Hat servers.</li>
+          <li>Configured AppDynamics to monitor AWS EKS pod failures, node starvation, and missing dependencies, improving cluster reliability.</li>
+          <li>Designed AWS solutions for auto-scaling and high availability using CloudFormation and Terraform.</li>
+        </ul>
+      </div>
+
+      <div class="stage collapsed">
+        <div class="stage-head">
+          <h3>Adecco India Pvt Ltd</h3>
+          <span class="when mono">Sep 2021 - Apr 2022</span>
+        </div>
+        <div class="stage-role">DevOps Engineer · Hyderabad, India</div>
+        <ul>
+          <li>Designed and deployed applications across the AWS stack using OpsWorks to automate configuration, deployment, and scaling.</li>
+          <li>Built CI/CD pipelines with Jenkins, Maven, Ant, and GitHub, integrating private repos and Chef for environment configuration.</li>
+          <li>Orchestrated containerized deployments with Docker and Kubernetes; used Ansible for on-prem and EC2 deployments.</li>
+          <li>Migrated WebSphere Application Servers to GCP via Cloud Deployment Manager, securing infrastructure with private subnets, Security Groups, and NACLs.</li>
+          <li>Used Ansible Tower and Python SSH for AWS node configuration management, improving automation and testing efficiency.</li>
+        </ul>
+        <button class="toggle" type="button">show details ↓</button>
+      </div>
+
+      <div class="stage collapsed">
+        <div class="stage-head">
+          <h3>Tech Mahindra</h3>
+          <span class="when mono">May 2020 - Jun 2021</span>
+        </div>
+        <div class="stage-role">Site Reliability Engineer · Hyderabad, India</div>
+        <ul>
+          <li>Launched and configured EC2 instances; managed IAM roles, Security Groups, and NACLs for access control.</li>
+          <li>Deployed scalable web apps via AWS Elastic Beanstalk and multi-cloud workloads using SaltStack and Pulumi.</li>
+          <li>Built Jenkins CI/CD pipelines and migrated production infrastructure to AWS VPC (CloudFormation, EC2, S3, Chef/OpsWorks).</li>
+          <li>Automated database deployment and configuration for MySQL, Cassandra, and MongoDB using Ansible and Terraform.</li>
+          <li>Leveraged GCP Load Balancing and Cloud CDN for scalable application design.</li>
+        </ul>
+        <button class="toggle" type="button">show details ↓</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="education">
+  <div class="wrap">
+    <div class="section-label">// build history</div>
+    <div class="section-title">Education</div>
+
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="deg">Master's, Computer Science</div>
+        <div class="school">Lewis University</div>
+        <div class="meta">Romeoville, IL · Dec 2023</div>
+      </div>
+      <div class="edu-card">
+        <div class="deg">Bachelor's, Computer Science &amp; Engineering</div>
+        <div class="school">Guru Nanak Institutions</div>
+        <div class="meta">Hyderabad, Telangana · Oct 2020</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="section-label">// reach out</div>
+    <div class="section-title">Let's ship something</div>
+    <p>Open to Senior DevOps, Cloud, and SRE roles. Happiest architecting infrastructure-as-code and pipelines that let teams ship faster without breaking production.</p>
+    <div class="contact-row">
+      <a class="btn primary" href="mailto:uppudeepak1@gmail.com">Send an email</a>
+      <a class="btn" href="tel:6304460007">Call 630-446-0007</a>
+      <a class="btn" href="https://www.linkedin.com/in/deepak-uppu-b81158179/" target="_blank" rel="noopener">View LinkedIn</a>
+    </div>
+    <div class="foot-note">deepak_uppu.portfolio &nbsp;·&nbsp; last deploy: this page &nbsp;·&nbsp; status: <span style="color:#6CD48A;">operational</span></div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var stage = btn.closest('.stage');
+      var collapsed = stage.classList.toggle('collapsed');
+      btn.textContent = collapsed ? 'show details ↓' : 'hide details ↑';
+    });
+  });
+</script>
+
+</body>
+</html>
